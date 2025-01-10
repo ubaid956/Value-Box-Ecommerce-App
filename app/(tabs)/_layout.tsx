@@ -1,37 +1,76 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import { View, Text } from "react-native";
+import React from "react";
+import { Tabs } from "expo-router";
+import Icon from "react-native-vector-icons/FontAwesome";
+import Icon2 from "react-native-vector-icons/Foundation";
+import Ionicons from "@expo/vector-icons/Ionicons";
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 
-import { TabBarIcon } from '@/components/navigation/TabBarIcon';
-import { Colors } from '@/constants/Colors';
-import { useColorScheme } from '@/hooks/useColorScheme';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import AntDesign from "@expo/vector-icons/AntDesign";
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
-
+const _layout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: "#002882",
+        tabBarInactiveTintColor: "#C6C6C6",
         headerShown: false,
-      }}>
+        tabBarStyle: {
+          backgroundColor: "white",
+          paddingBottom: 5,
+          height: 70,
+          borderTopWidth: 0,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+        },
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: 'Home',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'home' : 'home-outline'} color={color} />
+          tabBarIcon: ({ focused }) => (
+            <Ionicons name={focused? "home-sharp":"home-outline"} size={24}  color={focused ? "#002882" : "black"}/>
           ),
+          title: "Home",
         }}
       />
       <Tabs.Screen
-        name="explore"
+        name="Cart"
         options={{
-          title: 'Explore',
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon name={focused ? 'code-slash' : 'code-slash-outline'} color={color} />
+          tabBarIcon: ({ focused }) => (
+            <Ionicons name={focused?"cart-sharp": "cart-outline"} size={24}   color={focused ? "#002882" : "black"}/>
           ),
+          title: "Cart",
+        }}
+      />
+      <Tabs.Screen
+        name="Wishlist"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <MaterialIcons
+              name={focused ? "favorite" : "favorite-outline"}
+              size={24}
+              color={focused ? "#002882" : "black"}
+            />
+          ),
+          title: "WishList",
+        }}
+      />
+      <Tabs.Screen
+        name="Profile"
+        options={{
+          tabBarIcon: ({ focused }) => (
+            <FontAwesome5 name={focused? "user-alt":"user"} size={24} color={focused ? "#002882" : "black"}/>
+
+          ),
+
+          title: "Profile",
         }}
       />
     </Tabs>
   );
-}
+};
+
+export default _layout;
